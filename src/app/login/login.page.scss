@@ -1,0 +1,54 @@
+:host {
+    --login-spacing: 1.8rem;
+
+    .content {
+        margin: var(--login-spacing);
+        display: flex;
+        flex-direction: column;
+        max-width: 840px;
+    }
+    
+    
+    img.logo {
+        height: 25vh;
+
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        margin-top: var(--login-spacing);
+        margin-bottom: var(--login-spacing); 
+    }
+
+    ion-button:first-of-type {
+        margin-top: var(--login-spacing);
+    }
+    
+    @media only screen and (orientation: landscape) {
+        .content {
+            flex-direction: row;
+            justify-content: space-evenly;
+            margin-top: 12.5vh;
+        }
+        
+        img.logo {
+            height: 50vh;
+            margin: unset;
+            max-height: 250px;
+        }
+        
+        form {
+            flex-grow: 0.8;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    @media only screen and (min-width: 900px) {
+        .content {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}

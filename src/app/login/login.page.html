@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tierklinik Dobersberg</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="content">
+        <img class="logo" src="assets/logo.png">
+
+        <form (ngSubmit)="login()" #loginForm="ngForm" class="login-form">
+            <ion-item>
+                <ion-label position="floating">Benutzername</ion-label>
+                <ion-input clearInput type="text" required [(ngModel)]="username" name="username"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Passwort</ion-label>
+                <ion-input clearInput type="password" [(ngModel)]="password" required name="password"></ion-input>
+            </ion-item>
+
+            <ion-button type="submit" expand="block" [disabled]="loginDisabled || loginForm.invalid">Anmelden</ion-button>
+            <ion-button type="button" fill="clear" expand="block" size="small">Hilfe</ion-button>
+        </form>
+    </div>
+</ion-content>
