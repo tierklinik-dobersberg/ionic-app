@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  authServer: 'http://auth.example.com:8080',
+  iamServer: 'http://iam.example.com:8090',
+  dxrUrl: 'http://app.example.com:9000'
 };
 
 /*

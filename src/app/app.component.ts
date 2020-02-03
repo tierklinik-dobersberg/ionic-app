@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import * as AuthN from 'keratin-authn';
 import { Router } from '@angular/router';
+import { SessionGuard } from './session.guard';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
 	private splashScreen: SplashScreen,
 	private statusBar: StatusBar,
 	private router: Router,
+	private sessionGuard: SessionGuard,
   ) {
 	this.initializeApp();
   }
@@ -26,9 +28,12 @@ export class AppComponent {
 	this.platform.ready().then(() => {
 	  this.statusBar.styleDefault();
 	  
-	  AuthN.importSession()
-		.then(() => console.log(`Found valid user session: ${AuthN.session()}`))
-		.catch(() => this.router.navigate(['/login']));
+      this.sessionGuard.session
+        .then(session => {
+            if (!session) {
+                this.router.navigate(['/login'])
+            }
+        })
 
 	  this.splashScreen.hide();
 	});

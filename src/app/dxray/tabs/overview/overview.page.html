@@ -1,0 +1,77 @@
+<ion-content>
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col  size="12" size-sm>
+                <ion-item>
+                    <ion-label>
+                        <p>Name</p>
+                        <h2>{{study?.patientName}}</h2>
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col  size="12" size-sm>
+                <ion-item>
+                    <ion-label>
+                        <p>Datum</p>
+                        <h2>{{study?.studyDate | dxrDate}}</h2>
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col  size="12" size-sm>
+                <ion-item>
+                    <ion-label>
+                        <p>Tiername</p>
+                        <h2>{{study?.animalName}}</h2>
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+
+            <ion-col  size="12" size-sm>
+                <ion-item>
+                    <ion-label>
+                        <p>Tierart</p>
+                        <h2>{{study?.animalRace}}</h2>
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col  size="12" size-sm>
+                <ion-item>
+                    <ion-label>
+                        <p>Geburtsdatum</p>
+                        <h2>{{study?.patientBirthDate | dxrDate}}</h2>
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col  size="12" size-sm>
+                <ion-item>
+                    <ion-label>
+                        <p>Alter</p>
+                        <h2></h2>
+                    </ion-label>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-slides pager="true" *ngIf="!showSeries">
+        <ion-slide *ngFor="let series of study?.seriesList">
+            <div>
+                <ion-text>{{series?.seriesDescription}}</ion-text>
+                <div class="slide">
+                    <img *ngFor="let instance of series.instances"
+                        [attr.src]="getUrl(instance.url) | secureImage | async">
+                </div>
+                <ion-button expand="block" fill="outline">Öffnen</ion-button>
+            </div>
+        </ion-slide>
+    </ion-slides>
+
+    <app-series *ngIf="showSeries"></app-series>
+
+</ion-content>

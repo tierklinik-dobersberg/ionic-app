@@ -1,0 +1,228 @@
+<ion-header>
+    <ion-toolbar class="searchbar" [class.closed]="!showSearchBar">
+        <ion-searchbar #searchBar type="text" color="light" placeholder="Suchen" showCancelButton="never"
+            [(ngModel)]="searchText" (keydown)="checkAbortSearch($event)" (ngModelChange)="searchStudies($event)">
+        </ion-searchbar>
+
+        <ion-buttons slot="end">
+            <ion-button (click)="toggleSearch()">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+
+        <ion-title>Röntgen</ion-title>
+
+        <ion-buttons slot="end">
+            <ion-button (click)="toggleSearch()">
+                <ion-icon slot="icon-only" name="search"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [class.search-active]="showSearchBar">
+    <ng-container *ngIf="!!data">
+        <ion-refresher slot="fixed" *ngIf="!showSearchBar" (ionRefresh)="loadMore($event, true)">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+
+        <ion-grid fixed>
+            <ion-row *ngIf="showSearchBar && searchText === ''">
+                <ion-col>
+                    <ion-item class="ion-text-center">
+                        <ion-label color="primary" class="help-text">
+                            <p>Beginne zu tippen um bestehende Aufnahmen zu durchsuchen.</p>
+                            <p>Ein Klick auf <ion-icon name="close-circle-outline"></ion-icon> oder
+                            <ion-badge>ESC</ion-badge> beendet den Suchmodus</p>
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+
+            <ion-row *ngFor="let item of data; trackBy: trackStudy">
+                <ion-col>
+                    <ion-item [routerLink]="['view', item.studyInstanceUid]">
+                        <ion-thumbnail slot="start">
+                            <img *ngIf="!!item.url" [attr.src]="(item.url | secureImage | async)">
+                            <ion-skeleton-text *ngIf="!item.url"></ion-skeleton-text>
+                        </ion-thumbnail>
+
+                        <ion-label>
+                            <h3>
+                                <ion-text>{{item.patientName}}<ng-container *ngIf="!!item.animalName">,
+                                        {{item.animalName}}
+                                    </ng-container>
+                                </ion-text>
+                            </h3>
+                            <p *ngIf="!!item.animalRace && item.animalRace !== 'unknown'">
+                                <ion-text>{{item.animalRace}}</ion-text>
+                            </p>
+                            <p>
+                                <ion-text>{{item.studyDate | dxrDate}}</ion-text>
+                            </p>
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-infinite-scroll *ngIf="!showSearchBar" threshold="100px" (ionInfinite)="loadMore($event)">
+            <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Studien werden geladen">
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+        <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button color="medium" (click)="selectTool()">
+                <ion-icon name="hammer"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+
+    </ng-container>
+
+    <!-- skeleton content to be displayed while actually loading the data -->
+    <ion-grid fixed *ngIf="!data" id="skeleton">
+        <ion-row>
+            <ion-col>
+                <ion-list-header>
+                    <ion-skeleton-text animated style="width: 80px"></ion-skeleton-text>
+                </ion-list-header>
+            </ion-col>
+        </ion-row>
+
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+                <p>
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+    </ion-grid>
+
+</ion-content>

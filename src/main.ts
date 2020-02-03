@@ -6,7 +6,7 @@ import { environment } from './environments/environment';
 
 import * as AuthN from 'keratin-authn';
 
-AuthN.setHost('http://auth.example.com:8080');
+AuthN.setHost(environment.authServer);
 AuthN.setLocalStorageStore('authnSessionToken');
 
 if (environment.production) {

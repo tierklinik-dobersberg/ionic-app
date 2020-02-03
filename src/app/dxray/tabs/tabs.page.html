@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{study?.patientName}}<ng-container *ngIf="!!(study?.animalName)">, {{study?.animalName}}</ng-container>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-tabs>
+        <ion-tab-bar slot="bottom">
+            <ion-tab-button tab="overview">
+                <ion-icon name="list-box"></ion-icon>
+                <ion-label>Übersicht</ion-label>
+            </ion-tab-button>
+    
+            <ion-tab-button tab="series" class="ion-hide-sm-up">
+                <ion-icon name="apps"></ion-icon>
+                <ion-label>Aufnahmen</ion-label>
+            </ion-tab-button>
+
+            <ion-tab-button tab="studies">
+                <ion-icon name="apps"></ion-icon>
+                <ion-label>Andere Studien</ion-label>
+            </ion-tab-button>
+        </ion-tab-bar>
+    </ion-tabs>
+</ion-content>

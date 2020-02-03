@@ -3,6 +3,7 @@ import * as AuthN from 'keratin-authn';
 import { Router } from '@angular/router';
 import { LoadingController, AlertController } from '@ionic/angular';
 import { isArray } from 'util';
+import { SessionGuard } from '../session.guard';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginPage implements OnInit {
   password: string = '';
   loginDisabled: boolean = false;
 
-  constructor(private router: Router,
+  constructor(private sessionGuard: SessionGuard,
+              private router: Router,
               private alertController: AlertController,
               private loadingController: LoadingController) {}
 
@@ -47,6 +49,8 @@ export class LoginPage implements OnInit {
             username: this.username, 
             password: this.password
         });
+        console.log(`login succeeded: ${AuthN.session()}`)
+        this.sessionGuard.activate();
 
         this.router.navigate(['']);
     }

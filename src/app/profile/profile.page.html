@@ -1,0 +1,80 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Benutzerprofil</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid fixed>
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-thumbnail slot="start">
+                        <img [attr.src]="(avatarUrl | secureImage | async)">
+                    </ion-thumbnail>
+                    <ion-label>
+                        <h2>{{(user | async)?.username}}</h2>
+                        <p>Dein Benutzerprofil</p>
+                    </ion-label>
+                    <ion-button fill="outline" slot="end" (click)="editProfile()">Bearbeiten</ion-button>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12">
+                <ion-list-header mode="ios" color="light">Name</ion-list-header>
+                <ion-grid fixed>
+                    <ion-row>
+                        <ion-col>
+                            <ion-item>
+                                {{(user | async)?.firstname}}
+                            </ion-item>
+                        </ion-col>
+                        <ion-col>
+                            <ion-item>
+                                {{(user | async)?.lastname}}
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12" size-sm>
+                <ion-list-header mode="ios" color="light">Adresse</ion-list-header>
+                <ion-item-group>
+                    <ion-item>
+                        {{(user | async)?.street}}
+                    </ion-item>
+                    <ion-item>
+                        {{(user | async)?.cityCode}} {{(user | async)?.city}}
+                    </ion-item>
+                </ion-item-group>
+            </ion-col>
+
+            <ion-col size="12" size-sm>
+                <ion-list-header mode="ios" color="light">Kontakt</ion-list-header>
+                <ion-item-group>
+                    <ion-item>
+                        {{(user | async)?.email}}
+                    </ion-item>
+                    <ion-item>
+                        {{(user | async)?.phone}}
+                    </ion-item>
+                </ion-item-group>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-button color="danger" expand="block" (click)="logout()">Abmelden</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>

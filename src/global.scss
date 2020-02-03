@@ -24,3 +24,12 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.split-pane-md.split-pane-visible>.split-pane-side {
+    max-width: 270px; // overwrite max-width: 28% from ion-split-pane
+}
+
+ion-header {
+    --ion-background-color: var(--ion-color-primary-tint, white);
+    --ion-text-color: var(--ion-color-primary-contrast, black);
+}

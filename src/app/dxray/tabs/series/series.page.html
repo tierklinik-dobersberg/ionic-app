@@ -1,0 +1,66 @@
+<ion-content>
+    <ion-grid fixed>
+        <ion-row *ngFor="let series of study?.seriesList">
+            <ion-col>
+
+                <ion-item *ngFor="let instance of series.instances"
+                    [routerLink]="['/viewer', study?.studyInstanceUid, series?.seriesInstanceUid, instance?.sopInstanceUid]">
+                    <ion-thumbnail slot="start">
+                        <img [attr.src]="getUrl(instance.url) | secureImage | async">
+                        <ion-skeleton-text *ngIf="!instance.url"></ion-skeleton-text>
+                    </ion-thumbnail>
+
+                    <ion-label>
+                        <h2>{{series?.seriesDescription}}</h2>
+                    </ion-label>
+
+                    <ion-button slot="end"
+                        [routerLink]="['/viewer', study?.studyInstanceUid, series?.seriesInstanceUid, instance?.sopInstanceUid]">Ansehen</ion-button>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid *ngIf="!study" id="skeleton">
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+        <ion-item>
+            <ion-thumbnail slot="start">
+                <ion-skeleton-text></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+                <h3>
+                    <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                </h3>
+                <p>
+                    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                </p>
+            </ion-label>
+        </ion-item>
+    </ion-grid>
+
+</ion-content>

@@ -1,0 +1,15 @@
+ion-slide {
+    div {
+        margin-bottom: 26px;
+    }
+}
+.slide {
+    display: block;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+
+    img {
+        width: calc(1.5 * 127px);
+    }
+}

@@ -1,0 +1,38 @@
+:host {
+    display: block;
+}
+
+.searchbar {
+    position: absolute;
+    z-index: 11;
+    transform: translateY(0px);
+
+    height: var(--min-height);
+
+    transition-property: all;
+	transition-duration: .35s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+    
+    --background: var(--ion-color-primary-shade, white);
+}
+
+.closed {
+    transform: translateY(calc(var(--min-height) * -1));
+}
+
+.search-active {
+   --background: rgba(56,128,255, 0.15);
+}
+
+.help-text {
+    white-space: initial;
+
+    ion-icon, ion-badge {
+        position: relative;
+        top: 4px;
+    }
+    
+    ion-icon {
+        font-size: 130%;
+    }
+}
