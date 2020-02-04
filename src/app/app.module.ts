@@ -23,7 +23,7 @@ import { UserService } from './user.service';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    //{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useExisting: UserService, multi: true }
   ],
   bootstrap: [AppComponent]

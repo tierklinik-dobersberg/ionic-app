@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{ study?.patientName }} - {{ study?.animalName }} ({{study?.animalRace}})</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="viewer">
+    <div class="tool-panel ion-hide-md-down">
+      <ion-button color="light" fill="outline" expand="block">
+        <ion-icon name="code-working"></ion-icon>
+      </ion-button>
+
+      <ion-button color="light" fill="outline" expand="block">
+        <ion-icon name="share"></ion-icon>
+      </ion-button>
+
+      <ion-button color="light" fill="outline" expand="block">
+        <ion-icon name="information-circle"></ion-icon>
+      </ion-button>
+
+      <ion-button color="light" fill="outline" expand="block">
+        <ion-icon name="cellular"></ion-icon>
+      </ion-button>
+    </div>
+
+    <div id="dwv">
+      <div class="layerContainer">
+        <canvas class="imageLayer">Only for HTML5 compatible browsers ...</canvas>
+        <div class="drawDiv"></div>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -29,6 +29,10 @@ const routes: Routes = [
   {
     path: 'related-studies',
     loadChildren: () => import('./dxray/tabs/related-studies/related-studies.module').then( m => m.RelatedStudiesPageModule)
+  },
+  {
+    path: 'viewer/:studyID/:seriesID',
+    loadChildren: () => import('./dwv/dwv.module').then( m => m.DwvPageModule)
   }
 ];
 @NgModule({

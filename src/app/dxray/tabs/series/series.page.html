@@ -4,7 +4,7 @@
             <ion-col>
 
                 <ion-item *ngFor="let instance of series.instances"
-                    [routerLink]="['/viewer', study?.studyInstanceUid, series?.seriesInstanceUid, instance?.sopInstanceUid]">
+                    [routerLink]="['/viewer', study?.studyInstanceUid, series?.seriesInstanceUid]">
                     <ion-thumbnail slot="start">
                         <img [attr.src]="getUrl(instance.url) | secureImage | async">
                         <ion-skeleton-text *ngIf="!instance.url"></ion-skeleton-text>
@@ -15,7 +15,7 @@
                     </ion-label>
 
                     <ion-button slot="end"
-                        [routerLink]="['/viewer', study?.studyInstanceUid, series?.seriesInstanceUid, instance?.sopInstanceUid]">Ansehen</ion-button>
+                        [routerLink]="['/viewer', study?.studyInstanceUid, series?.seriesInstanceUid]">Ansehen</ion-button>
                 </ion-item>
             </ion-col>
         </ion-row>

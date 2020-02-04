@@ -1,0 +1,55 @@
+ion-content {
+    --background: #1f1f1f;
+    
+    .viewer {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+    
+        .tool-panel {
+            height: 100%;
+            width: 70px;
+            flex-grow: 0;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        #dwv {
+            //height: 100%;
+            flex-grow: 1;
+        }
+    }
+}
+
+/* Layers */
+.layerContainer {
+    position: relative;
+    padding: 0;
+    margin: auto;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+}
+
+.imageLayer {
+    position: absolute;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+}
+
+.drawDiv {
+    position: absolute;
+    pointer-events: none;
+}
+
+/* drag&drop */
+.dropBox {
+    border: 5px dashed black;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.dropBox.hover {
+    border: 5px dashed black;
+}

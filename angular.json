@@ -27,7 +27,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "node_modules/decoders/",
+                "input": "node_modules/dwv/decoders/",
                 "output": "assets"
               },
               {
