@@ -31,7 +31,7 @@ const routes: Routes = [
     loadChildren: () => import('./dxray/tabs/related-studies/related-studies.module').then( m => m.RelatedStudiesPageModule)
   },
   {
-    path: 'viewer/:studyID/:seriesID',
+    path: 'viewer/:studyID/:seriesID/:instanceID',
     loadChildren: () => import('./dwv/dwv.module').then( m => m.DwvPageModule)
   }
 ];

@@ -20,10 +20,7 @@ export class StudyService implements OnDestroy {
         return this.study$;
     }
 
-    getThumbnailUrl(wadoURI: string): string {
-        const scheme = environment.dxrUrl.startsWith('http://') ? 'http://' : 'https://';
-        return wadoURI.replace('dicomweb://', scheme) + '&contentType=image/jpeg';
-    }
+    getThumbnailUrl = this.dxr.getThumbnailUrl;
 
     constructor(private activeRoute: ActivatedRoute,
                 private dxr: DxrService) {

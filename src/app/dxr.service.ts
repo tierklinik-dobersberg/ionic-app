@@ -32,4 +32,9 @@ export class DxrService {
             q: searchTerm,
         }});
     }
+
+    getThumbnailUrl(wadoURI: string): string {
+        const scheme = environment.dxrUrl.startsWith('http://') ? 'http://' : 'https://';
+        return wadoURI.replace('dicomweb://', scheme) + '&contentType=image/jpeg';
+    }
 }

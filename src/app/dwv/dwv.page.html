@@ -1,38 +1,58 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
 
-    <ion-title>{{ study?.patientName }} - {{ study?.animalName }} ({{study?.animalRace}})</ion-title>
-  </ion-toolbar>
+        <ion-title>{{ study?.patientName }} - {{ study?.animalName }} ({{study?.animalRace}})</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="viewer">
-    <div class="tool-panel ion-hide-md-down">
-      <ion-button color="light" fill="outline" expand="block">
-        <ion-icon name="code-working"></ion-icon>
-      </ion-button>
+    <div class="viewer" [class.image-loaded]="loadProgress > 100">
 
-      <ion-button color="light" fill="outline" expand="block">
-        <ion-icon name="share"></ion-icon>
-      </ion-button>
+        <div class="tool-panel ion-hide-md-down">
+            <ng-container *ngFor="let tool of toolButtons">
+                <button type="button" class="toolbar-button ion-activatable" (click)="selectTool(tool)" [class.selected]="selectedTool === tool.id">
+                    <ion-icon [name]="tool.icon"></ion-icon>
+                    {{tool.label}}
+                </button>
+            </ng-container>
+        </div>
 
-      <ion-button color="light" fill="outline" expand="block">
-        <ion-icon name="information-circle"></ion-icon>
-      </ion-button>
+        <div>
+            <div *ngIf="loadProgress <= 100" class="image-loader">
+                <div class="ion-text-center">
+                    <ion-spinner name="crescent"></ion-spinner>
 
-      <ion-button color="light" fill="outline" expand="block">
-        <ion-icon name="cellular"></ion-icon>
-      </ion-button>
+                    <ion-item class="ion-text-center">
+                        <ion-label color="primary">
+                            Aufnahmen von {{study?.animalName}} werden geladen.
+                        </ion-label>
+                    </ion-item>
+
+                    <ion-progress-bar [value]="loadProgress">
+                    </ion-progress-bar>
+                </div>
+            </div>
+            <div class="viewer-content">
+                <div id="dwv" name="dwv">
+                    <div class="layerContainer">
+                        <canvas class="imageLayer">Only for HTML5 compatible browsers ...</canvas>
+                        <div class="drawDiv"></div>
+                    </div>
+                </div>
+                
+                <div class="series-list">
+                    <ng-container *ngFor="let series of study?.seriesList">
+                        <ng-container *ngFor="let instance of series?.instances">
+                            <div [routerLink]="['/viewer', study?.studyInstanceUid, series?.seriesInstanceUid, instance?.sopInstanceUid]">
+                                <img [attr.src]="getUrl(instance.url) | secureImage | async">
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div id="dwv">
-      <div class="layerContainer">
-        <canvas class="imageLayer">Only for HTML5 compatible browsers ...</canvas>
-        <div class="drawDiv"></div>
-      </div>
-    </div>
-  </div>
 </ion-content>

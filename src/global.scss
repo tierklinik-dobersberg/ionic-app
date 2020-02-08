@@ -33,3 +33,9 @@ ion-header {
     --ion-background-color: var(--ion-color-primary-tint, white);
     --ion-text-color: var(--ion-color-primary-contrast, black);
 }
+
+ion-button.multi-line-btn {
+    .button-inner {
+        flex-flow: column;
+    }
+}
