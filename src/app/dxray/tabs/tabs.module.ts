@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 
 import { TabsPage } from './tabs.page';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
+    SharedModule,
     RouterModule.forChild([{
         path: '',
         component: TabsPage,

@@ -4,7 +4,7 @@
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>
-            {{study?.patientName}}<ng-container *ngIf="!!(study?.animalName)">, {{study?.animalName}}</ng-container>
+            {{study | ohifOwnerName}}<ng-container *ngIf="!!(study?.animalName)">, {{study?.animalName}}</ng-container>
         </ion-title>
     </ion-toolbar>
 </ion-header>
