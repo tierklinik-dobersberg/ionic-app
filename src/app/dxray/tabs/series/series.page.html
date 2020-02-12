@@ -4,7 +4,7 @@
             <ion-col>
 
                 <ion-item *ngFor="let instance of series.instances"
-                    [routerLink]="['/viewer', study?.studyInstanceUid, series?.seriesInstanceUid]">
+                    [routerLink]="['/viewer', study?.studyInstanceUid, series?.seriesInstanceUid, instance?.sopInstanceUid]">
                     <ion-thumbnail slot="start">
                         <img [attr.src]="getUrl(instance.url) | secureImage | async">
                         <ion-skeleton-text *ngIf="!instance.url"></ion-skeleton-text>
