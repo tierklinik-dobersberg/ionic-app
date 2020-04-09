@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   authServer: 'http://auth.example.com:8080',
   iamServer: 'http://iam.example.com:8090',
-  dxrUrl: 'http://app.example.com:9000'
+  dxrUrl: 'http://app.example.com:9000',
+  disableAuth: false,
 };
 
 /*

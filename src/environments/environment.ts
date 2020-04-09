@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-  authServer: 'http://auth.example.com:8080',
-  iamServer: 'http://iam.example.com:8090',
-  dxrUrl: 'http://app.example.com:9000'
+  authServer: 'https://auth.ppacher.at',
+  iamServer: 'https://iam.ppacher.at',
+  dxrUrl: 'http://xray.tierklinikdobersberg.at:9000',
+  disableAuth: true,
 };
 
 /*

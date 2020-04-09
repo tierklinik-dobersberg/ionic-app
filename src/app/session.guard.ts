@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Rout
 import { Observable, TimeoutError } from 'rxjs';
 import * as AuthN from 'keratin-authn';
 import { jwt_claims } from './user.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,17 @@ export class SessionGuard implements CanActivate {
     }
 
     constructor(private router: Router) {
-        this.hasSession = AuthN.restoreSession()
-            .then(() => {
-                // below should throw if the token is invalid
-                jwt_claims(AuthN.session());
-                return true;
-            })
-            .catch(() => false);
+        if (environment.disableAuth) {
+            this.activate();
+        } else {
+            this.hasSession = AuthN.restoreSession()
+                .then(() => {
+                    // below should throw if the token is invalid
+                    jwt_claims(AuthN.session());
+                    return true;
+                })
+                .catch(() => false);
+        }
     }
 
     activate() {
